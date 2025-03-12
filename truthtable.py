@@ -1,0 +1,1 @@
+def truthtable2(‘not (Q and R) implies (not Q or not R)’)
