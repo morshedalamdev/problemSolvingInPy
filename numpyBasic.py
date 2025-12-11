@@ -7,7 +7,7 @@ print("--------------------------------\n")
 arr2 = np.array([[1, 2, 3], [4, 5, 6]])
 print("2D Array:\n", arr2)
 print("--------------------------------\n")
-
+# Outputs
 print("Array Size:", arr2.size)
 print("--------------------------------")
 print("Array Shape:", arr2.shape)
@@ -23,7 +23,7 @@ zeros = np.zeros((3, 3))
 ones = np.ones((2, 4))
 identity = np.eye(3)
 random = np.random.rand(2, 3)
-
+# Outputs
 print("Zeros matrix:\n", zeros)
 print("--------------------------------")
 print("Ones matrix:\n", ones)
@@ -37,7 +37,7 @@ print("--------------------------------\n")
 # Mathematical Operations
 a = np.array([1, 2, 3])
 b = np.array([4, 5, 6])
-
+# Outputs
 print("Addition: ", a + b)
 print("--------------------------------")
 print("Subtraction: ", a - b)

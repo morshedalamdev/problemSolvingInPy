@@ -1,6 +1,6 @@
+import time
 import numpy as np
 from collections import deque
-import matplotlib.pyplot as plt
 
 class Graph:
     def __init__(self, vertices):
@@ -93,51 +93,66 @@ def bfs(graph, start):
 
 
 def main():
-    
-    print("--------------------------------")
-    print("SEARCH ALGORITHMS DEMONSTRATION")
-    print("--------------------------------")
-    
+
     g = Graph(7)
-    
     edges = [(0, 1), (0, 2), (1, 3), (2, 4), (2, 5), (4, 6), (5, 6)]
-    
+
     for u, v in edges:
         g.addEdge(u, v)
-    
-    print("\n--- Graph Information ---")
-    g.displayMatrix()
-    g.displayList()
-    g.visualize()
-    
+
     # Test DFS Recursive
     print("\n--------------------------------")
     print("DEPTH-FIRST SEARCH (RECURSIVE)")
     print("--------------------------------")
     dfs_path_recursive = dfsRecursive(g, 0)
     print(f"DFS Path (Recursive): {dfs_path_recursive}")
-    
+
     # Test DFS Iterative
     print("\n--------------------------------")
     print("DEPTH-FIRST SEARCH (ITERATIVE)")
     print("--------------------------------")
     dfs_path_iterative = dfsIterative(g, 0)
     print(f"DFS Path (Iterative): {dfs_path_iterative}")
-    
+
     # Test BFS
     print("\n--------------------------------")
     print("BREADTH-FIRST SEARCH")
     print("--------------------------------")
     bfs_path, levels = bfs(g, 0)
-    print(f"BFS Path: {bfs_path}")
-    print(f"Levels from start: {levels}")
-    
-    # Compare results
+    print(f"\nBFS Path: {bfs_path}")
+    print(f"\nLevels from start: {levels}\n")
+
+    # Compare DFS and BFS on a larger graph
     print("\n--------------------------------")
-    print("COMPARISON")
+    print("SEARCH ALGORITHMS COMPARISON")
+    print("--------------------------------")
+    print("Testing on larger graph...")
+    print(f"Nodes: {g.V}, Edges: {len(edges)}")
+    # Measure DFS performance
+    start_time = time.time()
+    dfs_result = dfsIterative(g, 1)
+    dfs_time = time.time() - start_time
+
+    # Measure BFS performance
+    start_time = time.time()
+    bfs_result, _ = bfs(g, 1)
+    bfs_time = time.time() - start_time
+    print("\n--------------------------------")
+    print("PERFORMANCE COMPARISON")
+    print("--------------------------------")
+    print(f"{'Metric':<20} {'DFS':<17} BFS")
+    print("-----------------------------------------------------------------")
+    print(f"{'Execution Time':<20} {dfs_time*1000:.4f} ms{'':<8} {bfs_time*1000:.4f} ms")
+    print(f"{'Nodes Visited':<20} {len(dfs_result):<17} {len(bfs_result)}")
+    print(f"{'Traversal Order':<20} Depth-First{'':<6} Level-Order")
+    print(f"{'Data Structure':<20} Stack{'':<12} Queue")
+    print(f"{'Path Type':<20} Any Path{'':<9} Shortest Path")
+    print(f"{'Space Complexity':<20} O(h) - height{'':<4} O(w) - width")
+    print("\n--------------------------------")
+    print("TRAVERSAL ORDER COMPARISON")
     print("--------------------------------")
     print(f"DFS Path: {dfs_path_recursive}")
-    print(f"BFS Path: {bfs_path}")
+    print(f"BFS Path: {bfs_path}\n")
 
 
 if __name__ == "__main__":
