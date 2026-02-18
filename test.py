@@ -1,24 +1,37 @@
-# Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
-# The overall run time complexity should be O(log (m+n)).
+# You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+# You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
-from typing import List
-import math
+from typing import Optional
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 class Solution:
-    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        merged_arr = sorted(nums1 + nums2)
-        arr_len = len(merged_arr)
-        median_index = math.floor(arr_len / 2)
-        if arr_len % 2 == 0:
-            median_num = (merged_arr[median_index] + merged_arr[median_index - 1]) / 2
-        else:
-            median_num = merged_arr[median_index]
-        return float(median_num)
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        current = dummy
+        carry = 0
+
+        while l1 or l2 or carry:
+            val1 = l1.val if l1 else 0
+            val2 = l2.val if l2 else 0
+
+            total = val1 + val2 + carry
+            carry = total // 10
+            digit = total % 10
+
+            current.next = ListNode(digit)
+            current = current.next
+
+            if l1: l1 = l1.next
+            if l2: l2 = l2.next
+
+        return dummy.next
 
 sol = Solution();
 
-result1 = sol.findMedianSortedArrays([1, 3], [2]);
-result1 = sol.findMedianSortedArrays([1, 2], [3, 4]);
-result1 = sol.findMedianSortedArrays([0, 0], [0, 0]);
-result1 = sol.findMedianSortedArrays([2, 5, 6], [1, 3, 4, 7]);
-result1 = sol.findMedianSortedArrays([1, 2, 3], [4, 5, 6, 7, 8]);
+result1 = sol.addTwoNumbers(ListNode(2, ListNode(4, ListNode(3))), ListNode(5, ListNode(6, ListNode(4))));
+result1 = sol.addTwoNumbers(ListNode(0), ListNode(0));
+result1 = sol.addTwoNumbers(ListNode(9, ListNode(9, ListNode(9))), ListNode(9));
