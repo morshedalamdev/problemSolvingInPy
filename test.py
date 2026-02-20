@@ -1,37 +1,22 @@
-# You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
-# You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+"""
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+You may assume that each input would have exactly one solution, and you may not use the same element twice.\
+You can return the answer in any order.
+"""
 
-from typing import Optional
-
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+from typing import List
 
 class Solution:
-    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        dummy = ListNode(0)
-        current = dummy
-        carry = 0
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        nums_len = len(nums)
+        
+        for i in range(nums_len):
+            for j in range(i + 1, nums_len):
+                if(nums[i] + nums[j] == target):
+                    return[i, j]
 
-        while l1 or l2 or carry:
-            val1 = l1.val if l1 else 0
-            val2 = l2.val if l2 else 0
+sol = Solution()
 
-            total = val1 + val2 + carry
-            carry = total // 10
-            digit = total % 10
-
-            current.next = ListNode(digit)
-            current = current.next
-
-            if l1: l1 = l1.next
-            if l2: l2 = l2.next
-
-        return dummy.next
-
-sol = Solution();
-
-result1 = sol.addTwoNumbers(ListNode(2, ListNode(4, ListNode(3))), ListNode(5, ListNode(6, ListNode(4))));
-result1 = sol.addTwoNumbers(ListNode(0), ListNode(0));
-result1 = sol.addTwoNumbers(ListNode(9, ListNode(9, ListNode(9))), ListNode(9));
+sol.twoSum([2,7,11,15], 9)
+sol.twoSum([3,2,4], 6)
+sol.twoSum([3,3], 6)
